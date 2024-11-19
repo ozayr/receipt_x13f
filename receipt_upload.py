@@ -12,7 +12,7 @@ from utils.ocr_formatter import format_document
 from utils.data_processsor import add_one_row_to_dataframe
 import streamlit_scrollable_textbox as stx
 from utils.gpt_receipt_processor import GPTReceiptProcessor
-from keys import openai_api_key
+import os
 import time
 
 register_heif_opener()
@@ -35,6 +35,7 @@ def load_ocr_model():
 
 @st.cache_resource
 def load_receipt_processor():
+    openai_api_key = os.getenv("OPENAI_API_KEY")
     return GPTReceiptProcessor(api_key=openai_api_key, model_name="gpt-4o")
 
 
